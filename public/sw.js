@@ -1,4 +1,4 @@
-var CACHE_NAME = 'static-v1';
+var CACHE = 'static-v1';
 
 var urlsToCache = [
     '/images',
@@ -15,13 +15,14 @@ var urlsToCache = [
 self.addEventListener('install', function (event) {
     // Perform install steps
     event.waitUntil(
-        caches.open(CACHE_NAME)
+        caches.open(CACHE)
             .then(function (cache) {
                 return cache.addAll(urlsToCache);
             })
     );
 });
 
+const offlineFallbackPage = "index.html";
 
 // If any fetch fails, it will show the offline page.
 self.addEventListener("fetch", function (event) {
